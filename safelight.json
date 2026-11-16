@@ -1,0 +1,26 @@
+{
+  "id": "soft-proofing",
+  "name": "Soft Proofing",
+  "version": "1.0.0",
+  "description": "Previews on the Develop canvas how a photo will look printed on a paper or shown on another screen, from its ICC profile: rendering intents, black point compensation, the paper's white and the ink's black, and a gamut warning for what the output can't reproduce. A view aid only: it never reaches your edits or exports.",
+  "author": "Anthony Reimche",
+  "main": "dist/index.js",
+  "license": "GPL-3.0-or-later",
+  "categories": ["Develop", "Color", "Export"],
+  "keywords": [
+    "soft proof",
+    "soft proofing",
+    "proof",
+    "icc",
+    "colour profile",
+    "color profile",
+    "printer profile",
+    "paper",
+    "print",
+    "cmyk",
+    "gamut warning",
+    "rendering intent"
+  ],
+  "repository": "anthonyreimche/Soft-Proofing",
+  "minAppVersion": "3.2.4"
+}
