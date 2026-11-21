@@ -18,6 +18,14 @@ describe("proofStage", () => {
     expect(STAGE_PRIORITY).toBeLessThan(1000);
   });
 
+  // The inline's ints are mediump unless declared highp: 16 bits where the
+  // driver honours precision (Mesa), so 1.0 / vec2(1089) is a half-float
+  // reciprocal, up to half a texel off. A precision lead is not allowed inline.
+  it("reads the table's size into a highp int vector", () => {
+    expect(STAGE_GLSL).toMatch(/highp\s+ivec2\s+spSize\s*=\s*textureSize/);
+    expect(STAGE_GLSL).not.toMatch(/precision\s+highp\s+int/);
+  });
+
   it("stays out of the program until first turned on", () => {
     expect(stage.dormantWhen).toEqual({ [ON_KEY]: 0 });
     expect(stage.uniforms).toEqual([

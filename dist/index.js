@@ -1335,7 +1335,7 @@ function vt(e = () => globalThis.indexedDB) {
 var yt = `
 {
   if (${i} != 0) {
-    ivec2 spSize = textureSize(${o}, 0);
+    highp ivec2 spSize = textureSize(${o}, 0);
     float spN = float(spSize.y);
     if (spSize.y >= 2 && spSize.x == spSize.y * spSize.y) {
       vec3 spAt = clamp(c, 0.0, 1.0) * (spN - 1.0);
