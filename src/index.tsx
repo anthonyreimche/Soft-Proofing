@@ -34,6 +34,7 @@ export function activate(host: SafelightAPI, bytes: ProfileBytes = indexedDbByte
     title: "Soft Proofing",
     component: () => <ProofPanel view={view} library={library} />,
     defaultDock: { module: "develop", direction: "right" },
+    modules: ["develop"],
   });
   host.registerKeybinding({
     id: TOGGLE_ACTION,

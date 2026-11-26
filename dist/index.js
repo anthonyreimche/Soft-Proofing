@@ -1580,8 +1580,7 @@ function Nt(e, n, r = {}) {
 	};
 }
 function $(e) {
-	let t = new URLSearchParams(window.location.search).get("detached");
-	return (e.stores.useUIStore.getState().activeModule === "develop" || t === "develop") && !!e.stores.useDevelopStore.getState().photoId;
+	return e.navigation.current() === "develop" && !!e.stores.useDevelopStore.getState().photoId;
 }
 //#endregion
 //#region src/index.tsx
@@ -1602,7 +1601,8 @@ function Ft(e, t = vt()) {
 		defaultDock: {
 			module: "develop",
 			direction: "right"
-		}
+		},
+		modules: ["develop"]
 	}), e.registerKeybinding({
 		id: r,
 		label: "Soft proof with a profile",

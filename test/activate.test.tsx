@@ -29,7 +29,7 @@ describe("activate", () => {
     rig.keys[0].handler();
     expect(rig.viewValues.at(-1)).toBeNull();
     const calls = rig.viewValues.length;
-    rig.ui.setState({ activeModule: "library" });
+    rig.nav.module = "library";
     rig.keys[0].handler();
     await new Promise((r) => setTimeout(r, 20));
     expect(rig.viewValues.length).toBe(calls);

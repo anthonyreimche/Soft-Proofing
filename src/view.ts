@@ -242,9 +242,7 @@ export function createView(api: SafelightAPI, library: ProfileLibrary, options: 
   };
 }
 
-/** True with Develop in front, in this window or a popped-out one, and a photo open. */
+/** True with Develop the module this window shows (popped out or not) and a photo open. */
 export function inDevelop(api: SafelightAPI): boolean {
-  const detached = new URLSearchParams(window.location.search).get("detached");
-  const develop = api.stores.useUIStore.getState().activeModule === "develop" || detached === "develop";
-  return develop && !!api.stores.useDevelopStore.getState().photoId;
+  return api.navigation.current() === "develop" && !!api.stores.useDevelopStore.getState().photoId;
 }

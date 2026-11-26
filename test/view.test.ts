@@ -165,11 +165,25 @@ describe("getting ready ahead", () => {
     await vi.waitFor(() => expect(rig.prewarms()).toBe(2));
   });
 
+  it("starts when the module changes to Develop", async () => {
+    view.stop();
+    rig = fakeApi();
+    initRuntime(rig.api);
+    rig.nav.module = "library";
+    rig.ui.setState({ activeModule: "library" });
+    view = createView(rig.api, new ProfileLibrary(rig.api.settings, noBytes), { tableSize: SIZE, warmWaitMs: 0 });
+    await new Promise((r) => setTimeout(r, 50));
+    expect(rig.prewarms()).toBe(0);
+    rig.nav.module = "develop";
+    rig.ui.setState({ activeModule: "develop" });
+    await vi.waitFor(() => expect(rig.prewarms()).toBe(1));
+  });
+
   it("doesn't outside Develop", async () => {
     view.stop();
     rig = fakeApi();
     initRuntime(rig.api);
-    rig.ui.setState({ activeModule: "library" });
+    rig.nav.module = "library";
     view = createView(rig.api, new ProfileLibrary(rig.api.settings, noBytes), { tableSize: SIZE, warmWaitMs: 0 });
     await new Promise((r) => setTimeout(r, 50));
     expect(rig.prewarms()).toBe(0);

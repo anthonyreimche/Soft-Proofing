@@ -1,7 +1,7 @@
 {
   "name": "safelight-soft-proofing",
   "private": true,
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Soft Proofing extension for Safelight: previews on the Develop canvas how a photo will look printed on a paper or shown on another screen, from ICC profiles.",
   "type": "module",
   "scripts": {

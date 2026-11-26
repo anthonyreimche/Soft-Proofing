@@ -62,6 +62,7 @@ type FakeMembers = Pick<
   ui: Pick<SafelightAPI["ui"], "Button" | "Field" | "Row" | "Select" | "Stack" | "Toggle" | "tokens" | "alertDialog" | "confirmDialog">;
   develop: Pick<SafelightAPI["develop"], "setViewValues" | "prewarmStages">;
   presets: Pick<SafelightAPI["presets"], "pickFile">;
+  navigation: Pick<SafelightAPI["navigation"], "current">;
   stores: { useDevelopStore: Store<DevelopSlice>; useUIStore: Store<UiSlice>; create: SafelightAPI["stores"]["create"] };
 };
 
@@ -77,6 +78,8 @@ export interface Rig {
   settings: Map<string, unknown>;
   develop: Store<DevelopSlice>;
   ui: Store<UiSlice>;
+  /** The module navigation.current() answers, apart from the UI store the view listens to. */
+  nav: { module: string };
   commits: string[];
   /** Files pickFile hands out, first queued first; null for a cancelled pick. */
   picks: (File | null)[];
@@ -117,6 +120,7 @@ export function fakeApi(): Rig {
     },
   }));
   const ui = create<UiSlice>()(() => ({ activeModule: "develop" }));
+  const nav = { module: "develop" };
 
   function Select({ value, onChange, options, groups, ariaLabel, disabled }: SelectProps) {
     const option = (o: { value: string; label: string }) => React.createElement("option", { key: o.value, value: o.value }, o.label);
@@ -186,6 +190,7 @@ export function fakeApi(): Rig {
       prewarmStages: () => void prewarms++,
     },
     presets: { pickFile: async () => rig.picks.shift() ?? null },
+    navigation: { current: () => nav.module },
     stores: { useDevelopStore: develop, useUIStore: ui, create },
   };
 
@@ -203,6 +208,7 @@ export function fakeApi(): Rig {
     settings,
     develop,
     ui,
+    nav,
     commits,
   });
 }
